@@ -4,8 +4,7 @@ public class LinkedListUtil {
 
     public static final String APPENDER = "->";
 
-    public static void printLinkedList(Node head){
-        Node iterator = head;
+    public static void printLinkedList(Node iterator){
         while(iterator!=null){
             System.out.print(iterator.data);
             if (iterator.next!=null) {
@@ -13,5 +12,6 @@ public class LinkedListUtil {
             }
             iterator = iterator.next;
         }
+        System.out.println();
     }
 }
