@@ -2,9 +2,9 @@ package linkedlists.circularlinkedlists;
 
 import linkedlists.singlylinkedlists.Node;
 
-public class InsertAtBeginning {
+public class InsertAtEnd {
 
-    public Node insertAtBeginningEfficient(Node head, Node node){
+    public Node insertAtEndEfficient(Node head, Node node){
 
         if (head==null) {
             node.setNext(node);
@@ -18,10 +18,10 @@ public class InsertAtBeginning {
         head.setData(node.getData());
         node.setData(temp);
 
-        return head;
+        return node;
     }
 
-    public Node insertAtBeginningNaive(Node head, Node node){
+    public Node insertAtEndNaive(Node head, Node node){
 
         if (head==null) {
             node.setNext(node);
@@ -33,6 +33,6 @@ public class InsertAtBeginning {
             iterator = iterator.getNext();
         }
         iterator.setNext(node);
-        return node;
+        return head;
     }
 }
