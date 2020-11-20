@@ -4,7 +4,7 @@ package linkedlists.singlylinkedlists;
 import java.util.Objects;
 
 public class Node {
-    int data;
+    public int data;
     public Node next;
 
     public Node(int data) {
