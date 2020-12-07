@@ -1,0 +1,7 @@
+Stack in Java Collections
+* Stack class, ArrayDeque
+
+Stack is a child of Vector which is Legacy class and has support for thread safety.
+
+Unless we need the above features we will use ArrayDeque.
+
