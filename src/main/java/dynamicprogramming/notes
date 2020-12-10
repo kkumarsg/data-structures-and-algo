@@ -1,0 +1,22 @@
+
+                                          -------------------
+                                          Dynamic Programming
+                                          -------------------
+
+       What is it ?
+            The idea is to store the results of previous calculations and re-use them when required instead of re-calculating them.
+
+       Ways to achieve it.
+            * Top down approach (Memoization)
+                  This is just plain recursion with maps/arrays used to avoid re-calculating duplicate function calls.
+                  ex : fib(6) = fib(5)+fib(4).
+                  Here we call fib(6) first, ie from the top. And realize we don't have values for 5 and 4, so we try calculating them
+                  Hence the name top down. Ie function calls happen from
+                  n->n-1->n-2->n-3 in this fashion.
+
+            * Bottom up approach (Tabulation)
+                 This is when we start computing from the smallest inputs and keep them ready so that they can be used later.
+                 ex : fib(6) = fib(5)+fib(4).
+                 But here, we would've already calculated fib(5) and fib(4) by the time we reach fib(6).
+                 Ie we're coming from bottom to top.
+                 0->1->2->3... ->n-1>n in this fashion.
