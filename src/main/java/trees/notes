@@ -1,0 +1,28 @@
+
+
+                         -----
+                         TREES
+                         -----
+
+* Trees are used when you want to store hierarchical data.
+  Ex : Organization structure
+       Folder structures
+
+* Trees are non linear data structures.
+* No of children a tree has is degree of a tree.
+* XML/HTML is read as a tree in javascript.
+* In OOP (Inheritance)
+
+Binary Tree.
+    Degree of a node is at most 2.
+
+Tree Traversal.
+       Tree traversal is printing every element of a tree.
+    1) In order   : left, root, right
+    2) Pre order  : root, left, right
+    3) Post order : left, right, root
+       Remember in all of the orders are in ref to the way root element is present in tree visualization.
+
+Depth First (Recursion) : We go down in depth till we find a leaf node and come.
+
+Remember: All the recursive calls in trees with a auxiliary space of O(Height).
