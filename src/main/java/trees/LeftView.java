@@ -23,6 +23,7 @@ public class LeftView {
         if (node==null) {
             return ;
         }
+
         if(map.get(level)==null){
             System.out.println(node.getKey());
             map.put(level, 1);
