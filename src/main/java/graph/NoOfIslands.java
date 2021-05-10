@@ -31,7 +31,7 @@ public class NoOfIslands {
             (i+1,j-1)   (i+1,j)    (i+1,j+1)
      */
 
-    // we are considering here that a person can move in all 8 directions.
+    // we are considering here that a peBFS.javarson can move in all 8 directions.
     // remove last 4 conditions if you want to ignore diagonal conditions.
     public int noOfIslands(char[][] grid, int i, int j, boolean[][] visited){
         visited[i][j] = true;

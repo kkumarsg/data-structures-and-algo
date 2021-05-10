@@ -1,0 +1,101 @@
+
+Question Order:
+
+
+1) BFS of a graph: using level order traversal (queue)
+    variations: for both connected and disconnected.
+2) DFS of a graph: using recursion, inside recursive function iterate over adjacent elements.
+    variations: for both connected and disconnected.
+
+3) Find no of islands.
+    Traverse through every node (remember this is a disconnected graph)
+    change : instead of going through adjacents, here we go through all the possible 8 paths and mark the
+             connected components as visited.
+    In the end, we'll only find disconnected components.
+4) Shortest path in an unweighted graph.
+    BFS is more intuitive to this. It's finding the level of every node from source.
+    change : everytime you add a element to queue, do this -> dist[adjacent] = distance[parent]+1;
+    And, once you're done traversing every element(adjacent), you can return the distance array.
+
+Cycle Detection :
+5) Undirected graph (Graph could be disconnected)
+    You can traverse the graph in either BFS or DFS way. While traversing pass a parent.
+    DFS is more intuitive.
+        when an adjacent is already visited and is not equal to current parent then we've a loop.
+    BFS : If you try pushing a combination of parent and adjacent into the queue, you can find a cycle via BFS as well.
+6) Directed graph
+    DFS : It's same as above, instead of comparing with parent, you'll compare with stack[node].
+        You need to keep track of stack calls you've made, if you happen to come across same vertex in the stack
+        then you've a loop.
+        Keep another boolean array stack[], everytime you visit a node mark stack[node]=true;
+        And when you come out of the loop, mark stack[node]=false; So that next disconnected component doesn't consider this.
+    BFS : You could do this via topological sorting, which will be discussed next.
+
+Topological Sorting. (Applies only to directed graph)
+                1   4
+               / \ / \
+              2   3   5
+             /   /
+             |  /
+              6
+             This is a directed graph, directions must be intuitive (top down)
+           Explanation : 3 is dependent on 1 and 4. Hence 3 should be printed only after 1 & 4.
+                         6 is dependent on 2 & 3, Hence 6 should be printed only after 2 & 3.
+           Output : [1,4,2,3,5,6] Note: topological sorting is not unique.
+    BFS : Here we find the nodes which have zero degree and push them to queue first.
+          We also populate a map with every vertex and it's indegrees( No of edges this vertex is receiving)
+          In level order traversal, we decrease the map indegree when we come across it by 1.
+          But, we push it to queue only when the indegree of a key(adjacent) has reached 0.
+
+    DFS : Here we do the normal dfs traversal, but after processing all the adjacents we push the node to stack.
+        By the end of traversal, the stack will contains the topological sort of the graph.
+
+        Why this works: for(every adjacent : vertex)
+                        {
+                            dfs(vertex) if not visited.
+                        }
+                        stack.push(vertex).
+            As you can see, the push happens only when we've reached bottom nodes and we starting coming up.
+            Which means the bottom nodes(nodes with high degree will be executed in the end).
+
+    Cycle Detection in a directed graph.
+        If there's a cycle, then indegree of a node will never become zero in the map, we will not be able to traverse all the nodes,
+        Hence if count<V then there exists a cycle.
+        Ex :
+            (1)
+                    1       Consider the directions in such a way that it becomes a cycle. :D
+                   / \
+                  2--->3
+              (2,1),(3,1),(1,1). No element with zero indegree.
+
+            (2)
+                  1<---4
+                 / \
+                2--->3       (2,1) (1,2) (3,1) (4,0). So we start with 4.
+                             4's adjacent is 1. so we make (1,1)
+                             And we're done.. No more adjacents with zero vertex, hence we come out of queue.
+
+    Shortest Path in DAG (weighted)
+
+                      2      3        6
+                   0---->1---->2--------->3           0 goes to 4, 4 comes to 2 and 5 comes to 1.
+                   \          /          /
+                 1  \     2  /          /1
+                     \      /          /
+                      \    /          /
+                         4 --------->5
+                               4
+
+                 Approach : First we find the topological sorting, say topoSort[].
+                            initialize distance[] which will store shortest distance from source to ith node.
+                            distance[source] = 0; // source to source dist is 0. Others will be infinity.
+                            Iterate over the topoSort Array -> vertex
+                                for adjacent in vertex
+                                    if(distance[adjacent]>weight(vertex,adjacent)+distance[vertex])
+                                        distance[adjacent]=weight(vertex,adjacent)+distance[vertex]
+                            return distance array.
+
+                       It works because
+                        * we don't have a loop.
+                        * distance of adjacent = distance of vertex + weight(vertex,adjacent)
+                        * if any of the new distance becomes lesser than the old one, we update it.
